@@ -1,5 +1,6 @@
 import scrapy
 from hackernews.items import HackernewsItem
+from hackernews.utils import utils
 import datetime
 
 class HackernewsSpider(scrapy.Spider):
@@ -26,3 +27,11 @@ class HackernewsSpider(scrapy.Spider):
                 request_timestamp=request_timestamp,
                 applied_filter=None  # Initially, no filter applied
             )
+            
+    def filter_more_than_five_words(self, entries):
+        filtered = [entry for entry in entries if utils.word_count(entry['title']) > 5]
+        return sorted(filtered, key=lambda x: x['comments'], reverse=True)
+
+    def filter_five_or_fewer_words(self, entries):
+        filtered = [entry for entry in entries if utils.word_count(entry['title']) <= 5]
+        return sorted(filtered, key=lambda x: x['points'], reverse=True)

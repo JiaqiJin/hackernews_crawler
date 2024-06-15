@@ -1,13 +1,9 @@
 from scrapy.crawler import CrawlerProcess
 import pandas as pd
 import re
+from hackernews.utils import utils
 from database.hackernews_database import HackerNewsDatabase
 from hackernews.spiders.hackernews_spider import HackernewsSpider
-
-def word_count(title):
-    words = re.findall(r'\b\w+(?:-\w+)*\b', title)
-    return len(words)
-
 class HackerNewsCrawler:
     def __init__(self):
         self.db = HackerNewsDatabase()
@@ -26,7 +22,7 @@ class HackerNewsCrawler:
         df = pd.read_json('hackernews.json')
 
         # Filter and sort entries
-        df['title_word_count'] = df['title'].apply(word_count)
+        df['title_word_count'] = df['title'].apply(utils.word_count)
         more_than_five_words = df[df['title_word_count'] > 5].sort_values(by='comments', ascending=False)
         five_or_fewer_words = df[df['title_word_count'] <= 5].sort_values(by='points', ascending=False)
 
