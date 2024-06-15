@@ -44,3 +44,10 @@ python main.py
 4. Execution: Run the script using Python : python main.py
 
 5. Output: Scraper outputs are stored in hackernews.db and hackernews.json.
+
+## How to run test
+
+run command on your console
+```bash
+pytest
+```
