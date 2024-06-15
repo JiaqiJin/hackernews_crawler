@@ -41,8 +41,6 @@ python main.py
 
 3. Database Storage: Filtered and sorted data (more_than_five_words and five_or_fewer_words) are stored in the SQLite database.
 
-4. Execution: Run the script using Python :
+4. Execution: Run the script using Python : python main.py
 
-```bash
-python main.py
-```
+5. Output: Scraper outputs are stored in hackernews.db and hackernews.json.
